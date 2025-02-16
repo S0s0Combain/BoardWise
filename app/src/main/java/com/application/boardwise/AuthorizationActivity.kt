@@ -1,11 +1,14 @@
 package com.application.boardwise
 
 import android.os.Bundle
+import android.view.Window
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.toArgb
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -18,6 +21,8 @@ class AuthorizationActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             BoardWiseTheme {
+                val window: Window = this.window
+                window.navigationBarColor = MaterialTheme.colorScheme.background.toArgb()
                 Surface(color = DarkBlue) {
                     AuthApp()
                 }
