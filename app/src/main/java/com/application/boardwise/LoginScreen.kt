@@ -56,13 +56,25 @@ fun LoginScreen(navController: NavController) {
         OutlinedTextField(
             value = email, onValueChange = { email = it },
             label = { Text("Email") },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            isError = emailError != null,
+            supportingText = {
+                if (emailError != null) {
+                    Text(text = emailError!!, color = Color.Red)
+                }
+            }
         )
         Spacer(modifier = Modifier.height(8.dp))
         OutlinedTextField(
             value = password, onValueChange = { password = it },
             label = { Text(text = "Password") },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            isError = passwordError != null,
+            supportingText = {
+                if (passwordError != null) {
+                    Text(text = passwordError!!, color = Color.Red)
+                }
+            }
         )
         Spacer(modifier = Modifier.height(16.dp))
         Button(onClick = {
