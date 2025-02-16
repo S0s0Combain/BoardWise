@@ -33,6 +33,12 @@ import androidx.navigation.NavController
 fun LoginScreen(navController: NavController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var emailError by remember {
+        mutableStateOf<String?>(null)
+    }
+    var passwordError by remember {
+        mutableStateOf<String?>(null)
+    }
     val context = LocalContext.current
 
     Column(
@@ -42,7 +48,10 @@ fun LoginScreen(navController: NavController) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Image(bitmap = ImageBitmap.imageResource(id = R.drawable.logo), contentDescription = "The app's logo")
+        Image(
+            bitmap = ImageBitmap.imageResource(id = R.drawable.logo),
+            contentDescription = "The app's logo"
+        )
         Spacer(modifier = Modifier.height(16.dp))
         OutlinedTextField(
             value = email, onValueChange = { email = it },
@@ -56,7 +65,20 @@ fun LoginScreen(navController: NavController) {
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(16.dp))
-        Button(onClick = { /*TODO*/ }, shape = RoundedCornerShape(10.dp), modifier = Modifier.fillMaxWidth()) {
+        Button(onClick = {
+            emailError = null
+            passwordError = null
+
+            if (email.isEmpty()) {
+                emailError = "Email cannot be empty"
+                return@Button
+            }
+
+            if (password.isEmpty()) {
+                passwordError = "Password cannot be empty"
+                return@Button
+            }
+        }, shape = RoundedCornerShape(10.dp), modifier = Modifier.fillMaxWidth()) {
             Text(text = "Enter")
         }
         TextButton(onClick = { navController.navigate("register") }) {
